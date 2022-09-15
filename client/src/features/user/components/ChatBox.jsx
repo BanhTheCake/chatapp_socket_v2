@@ -66,6 +66,7 @@ const ChatBox = () => {
             });
             socket.on(`receive-message`, (data) => {
                 console.log(data);
+                
                 setMessageList((prev) => [data, ...prev]);
             });
         }
