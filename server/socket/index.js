@@ -11,6 +11,7 @@ const socketInit = (io) => {
             socket.leave(`${newData[0]}:${newData[1]}`);
         });
         socket.on('send-message', (data) => {
+            console.log(data);
             const newData = [data.from, data.to].sort();
             io.to(`${newData[0]}:${newData[1]}`).emit('receive-message', data);
         });
