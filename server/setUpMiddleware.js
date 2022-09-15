@@ -6,14 +6,7 @@ let RedisStore = require('connect-redis')(session);
 require('dotenv').config();
 
 const config = (app) => {
-    const redisClient = new Redis({
-        username: process.env.REDIS_SERVICE_NAME,
-        host: process.env.REDIS_HOST,
-        password: process.env.REDIS_PASSWORD,
-        port: process.env.REDIS_PORT || 6379,
-        tls: true,
-    });
-
+    const redisClient = new Redis(process.env.REDIS_URL);
     app.use(
         cors({
             origin: 'https://chatapp-socket-v2.vercel.app',
