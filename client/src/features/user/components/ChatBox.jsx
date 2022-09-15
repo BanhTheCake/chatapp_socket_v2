@@ -65,9 +65,12 @@ const ChatBox = () => {
                 to: currentUserTextToId,
             });
             socket.on(`receive-message`, (data) => {
-                console.log(data);
-                
-                setMessageList((prev) => [data, ...prev]);
+               try {
+                    console.log(data);
+                    setMessageList((prev) => [data, ...prev]);
+               } catch (error) {
+                    console.log(error);
+               }
             });
         }
         return () => {

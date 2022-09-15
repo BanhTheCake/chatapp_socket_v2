@@ -147,11 +147,15 @@ const FriendList = () => {
 
     useEffect(() => {
         socket.on('receiveFriend', data => {
-            console.log('data', data);
-            if (data.friend === userId) {
-                setUserList(prev => [data.currentUser, ...prev])
+            try {
+                console.log('data', data);
+                if (data.friend === userId) {
+                    setUserList(prev => [data.currentUser, ...prev])
+                }
+                return;
+            } catch (error) {
+                console.log(error);
             }
-            return;
         })
         return () => {
             socket.off('receiveFriend')
