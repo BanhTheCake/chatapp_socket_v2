@@ -16,7 +16,7 @@ const config = (app) => {
 
     app.use(
         cors({
-            origin: 'http://localhost:3000',
+            origin: 'https://chatapp-socket-v2.vercel.app',
             credentials: true,
         })
     );
