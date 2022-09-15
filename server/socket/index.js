@@ -2,7 +2,6 @@ const db = require('../models');
 
 const socketInit = (io) => {
     io.on('connection', (socket) => {
-        console.log('a user connected');
         socket.on('connect-room', (data) => {
             const newData = [data.from, data.to].sort();
             socket.join(`${newData[0]}:${newData[1]}`);
@@ -25,7 +24,6 @@ const socketInit = (io) => {
             socket.broadcast.emit('receiveFriend', { currentUser, friend });
         });
         socket.on('disconnect', () => {
-            console.log('a user has disconnect');
         });
     });
 };

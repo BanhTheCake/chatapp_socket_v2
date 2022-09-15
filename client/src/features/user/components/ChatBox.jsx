@@ -15,6 +15,7 @@ const ChatBox = () => {
     const [messageList, setMessageList] = useState([]);
     const [inputBox, setInputBox] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
     const currentUserTextToIdRef = useRef(null);
     const clearTimeOutRef = useRef(null);
 
@@ -82,10 +83,10 @@ const ChatBox = () => {
                 createdAt: moment(Date.now()).format(),
                 from: userId,
                 to: currentUserTextToId,
-                text: input
-            }
+                text: input,
+            };
             socket.emit('send-message', emitData);
-            await axiosClient({
+            axiosClient({
                 method: 'post',
                 url: 'https://chatappsocketbackend.onrender.com/message/newMessage',
                 data: {
@@ -115,7 +116,11 @@ const ChatBox = () => {
                 overflow={'hidden'}
             >
                 <HStack justifyContent={'space-between'} w={'full'} px={3}>
-                    <Text textTransform={'capitalize'} color={'black'} fontWeight={'semibold'}>
+                    <Text
+                        textTransform={'capitalize'}
+                        color={'black'}
+                        fontWeight={'semibold'}
+                    >
                         {currentUserTextToUsername}
                     </Text>
                     <Button colorScheme={'red'} onClick={handleClick}>

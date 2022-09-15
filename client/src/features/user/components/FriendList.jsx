@@ -43,7 +43,6 @@ const FriendList = () => {
     const [isLoadingFriends, setIsLoadingFriends] = useState(false);
     const [isLoadingSearch, setIsLoadingSearch] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-
     const [searchFriends, setSearchFriends] = useState('');
     const [friendList, setFriendList] = useState([]);
 

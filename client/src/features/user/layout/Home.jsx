@@ -1,22 +1,15 @@
-import { Button, HStack, VStack } from '@chakra-ui/react';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
-import axiosClient from '../../../api/setupAxios';
+import { HStack, VStack } from '@chakra-ui/react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import socket from '../../../utils/socketIo';
-import { handleSignOut, setDataAuth } from '../../auth/authSlice';
 import ChatBox from '../components/ChatBox';
 import FriendList from '../components/FriendList';
 
 const Home = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch()
-
     useEffect(() => {
         socket.connect();
     }, [])
-
     return (
         <>
             <VStack w={'100vw'} h={'100vh'} p={'12'}>
