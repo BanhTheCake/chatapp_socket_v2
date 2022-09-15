@@ -11,7 +11,7 @@ export const setUserImage = createAsyncThunk(
                 try {
                     console.log(data);
                     await axiosClient.post(
-                        'http://localhost:3002/setImageUser',
+                        'https://chatappsocketbackend.onrender.com/setImageUser',
                         { image: data }
                     );
                     dispatch(setDataImage(data));

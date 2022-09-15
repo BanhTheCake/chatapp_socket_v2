@@ -10,7 +10,7 @@ export const handleLoginUser = createAsyncThunk(
                 try {
                     axios.defaults.withCredentials = true;
                     const res = await axios.post(
-                        'http://localhost:3002/auth/login',
+                        'https://chatappsocketbackend.onrender.com/auth/login',
                         {
                             username: data.username,
                             password: data.password,
@@ -48,7 +48,7 @@ export const handleRegisterUser = createAsyncThunk(
                 try {
                     axios.defaults.withCredentials = true;
                     const res = await axios.post(
-                        'http://localhost:3002/auth/register',
+                        'https://chatappsocketbackend.onrender.com/auth/register',
                         {
                             username: data.username,
                             password: data.password,
@@ -74,7 +74,7 @@ export const handleSignOut = createAsyncThunk(
             setTimeout(async () => {
                 try {
                     axios.defaults.withCredentials = true
-                    await axios.get('http://localhost:3002/auth/logout');
+                    await axios.get('https://chatappsocketbackend.onrender.com/auth/logout');
                     localStorage.clear();
                     dispatch(clearData())
                     resolve();

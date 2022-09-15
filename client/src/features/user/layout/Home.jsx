@@ -17,19 +17,6 @@ const Home = () => {
         socket.connect();
     }, [])
 
-    const handleClick = async () => {
-        try {
-            const data = await axiosClient.get(
-                'http://localhost:3002/getCurrentUser'
-            );
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-            dispatch(handleSignOut())
-            return navigate('/login');
-        }
-    };
-
     return (
         <>
             <VStack w={'100vw'} h={'100vh'} p={'12'}>

@@ -37,7 +37,7 @@ const ChatBox = () => {
                 setIsLoading(true);
                 const data = await axiosClient({
                     method: 'get',
-                    url: 'http://localhost:3002/message/getCurrentMessage',
+                    url: 'https://chatappsocketbackend.onrender.com/message/getCurrentMessage',
                     params: {
                         currentUserId: currentUserTextToId,
                     },
@@ -79,7 +79,7 @@ const ChatBox = () => {
         try {
             const data = await axiosClient({
                 method: 'post',
-                url: 'http://localhost:3002/message/newMessage',
+                url: 'https://chatappsocketbackend.onrender.com/message/newMessage',
                 data: {
                     currentUserId: currentUserTextToId,
                     text: input,

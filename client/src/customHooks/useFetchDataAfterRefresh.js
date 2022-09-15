@@ -15,7 +15,7 @@ const useFetchDataAfterRefresh = () => {
         const getData = async () => {
             axios.defaults.withCredentials = true;
             const res = await axios.get(
-                'http://localhost:3002/auth/authUserReloadPage'
+                'https://chatappsocketbackend.onrender.com/auth/authUserReloadPage'
             );
             setIsGetData(false);
             if (!res.data?.login) {

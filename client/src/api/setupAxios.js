@@ -31,7 +31,7 @@ axiosClient.interceptors.response.use(
         ) {
             axios.defaults.withCredentials = true;
             const res = await axios.get(
-                'http://localhost:3002/auth/refreshAccessToken'
+                'https://chatappsocketbackend.onrender.com/auth/refreshAccessToken'
             );
             const token = res.data.token;
 

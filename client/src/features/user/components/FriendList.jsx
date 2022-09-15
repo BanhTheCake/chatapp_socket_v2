@@ -62,7 +62,7 @@ const FriendList = () => {
             try {
                 setIsLoadingFriends(true);
                 const data = await axiosClient.get(
-                    'http://localhost:3002/getFriendList'
+                    'https://chatappsocketbackend.onrender.com/getFriendList'
                 );
                 if (!data) {
                     dispatch(handleSignOut());
@@ -100,7 +100,7 @@ const FriendList = () => {
             try {
                 let data;
                 data = await axiosClient.post(
-                    'http://localhost:3002/searchFriendList',
+                    'https://chatappsocketbackend.onrender.com/searchFriendList',
                     { searchQuery: searchFriends }
                 );
                 if (data) {
@@ -133,7 +133,7 @@ const FriendList = () => {
                 console.log(friendId);
                 console.log(username);
                 const data = await axiosClient.post(
-                    'http://localhost:3002/addFriend',
+                    'https://chatappsocketbackend.onrender.com/addFriend',
                     { friendUserId: friendId }
                 );
                 if (data.message === 'successful') {
