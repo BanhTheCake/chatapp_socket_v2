@@ -1,4 +1,4 @@
-import { Box, flatten, Text, VStack } from '@chakra-ui/react';
+import { Box, Text, VStack } from '@chakra-ui/react';
 import moment from 'moment-timezone';
 import React from 'react';
 

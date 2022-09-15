@@ -19,10 +19,10 @@ const socketInit = (io) => {
             const { userId, friend } = data;
             const currentUser = await db.Users.findOne({
                 where: { userId },
-                raw: true
+                raw: true,
             });
-            delete currentUser.password
-            socket.broadcast.emit('receiveFriend', { currentUser, friend })
+            delete currentUser.password;
+            socket.broadcast.emit('receiveFriend', { currentUser, friend });
         });
         socket.on('disconnect', () => {
             console.log('a user has disconnect');

@@ -77,7 +77,14 @@ const ChatBox = () => {
 
     const handleSendMessage = async (input) => {
         try {
-            const data = await axiosClient({
+            const emitData = {
+                createdAt: moment(Date.now()).format(),
+                from: userId,
+                to: currentUserTextToId,
+                text: input
+            }
+            socket.emit('send-message', emitData);
+            await axiosClient({
                 method: 'post',
                 url: 'https://chatappsocketbackend.onrender.com/message/newMessage',
                 data: {
@@ -85,7 +92,6 @@ const ChatBox = () => {
                     text: input,
                 },
             });
-            socket.emit('send-message', data);
         } catch (error) {
             console.log(error);
         }

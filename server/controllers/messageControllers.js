@@ -12,7 +12,7 @@ const getCurrentMessage = async (req, res, next) => {
                 to: { [Op.or]: [userId, currentUserId] },
             },
             separate: true,
-            order: [['createdAt', 'DESC']]
+            order: [['createdAt', 'DESC']],
         });
         if (!messageList) {
             return res.json({ login: false, message: 'Please Try Again' });

@@ -1,10 +1,5 @@
-import axios from 'axios';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import useFetchDataAfterRefresh from './customHooks/useFetchDataAfterRefresh';
-import { setDataAuth } from './features/auth/authSlice';
 import Login from './features/auth/layout/Login';
 import Register from './features/auth/layout/Register';
 import Avatar from './features/user/layout/Avatar';

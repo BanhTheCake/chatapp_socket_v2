@@ -1,16 +1,18 @@
--   set Foreign key nhưng trong database vẫn phải thêm kiểu dữ liệu đó vào, nó không tự thêm
+### Backend:
 
--- fix:
+    - Backend: ExpressJs, socket.io, ioRedis
+    - Database: sequelize + postgres (https://render.com) + redis (session / https://render.com)
+    - authenticate: jwt, bcrypt
+    - other: nodemon, uuid, express-rate-limit, dotenv, cors
+    - deploy: render.com
 
-1. Loading
-1. shift + enter để xuống dòng
+### Frontend:
 
-"development": {
-"username": "root",
-"password": null,
-"database": "sequelize-socket",
-"host": "127.0.0.1",
-"dialect": "mysql",
-"port": 3306,
-"logging": false
-},
+    - Frontend: ReactJs
+    - UI/UX: chakra-UI, framer-motion
+    - auth: react-form-hook, yup
+    - store: redux, redux-thunk
+    - other: momentJs, lodash (debounce), axios (api)
+    - deploy: vercel.com
+
+### No responsive: (https://chatapp-socket-v2.vercel.app)

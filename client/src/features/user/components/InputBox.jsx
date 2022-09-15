@@ -1,7 +1,6 @@
 import {
     Button,
     HStack,
-    Input,
     InputGroup,
     InputRightElement,
     Textarea,

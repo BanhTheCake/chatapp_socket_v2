@@ -1,4 +1,3 @@
-const session = require('express-session')
 const express = require('express');
 require('dotenv').config()
 

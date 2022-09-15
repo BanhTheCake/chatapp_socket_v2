@@ -206,8 +206,8 @@ const authUserReloadPage = async (req, res, next) => {
 
 const logout = (req, res, next) => {
     req.session?.destroy();
-    return res.json({ message: 'done' })
-}
+    return res.json({ message: 'done' });
+};
 
 module.exports = {
     register,

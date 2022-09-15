@@ -1,6 +1,5 @@
 import { Box, Button, Divider } from '@chakra-ui/react';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import InputForm from '../../../components/form/InputForm';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';

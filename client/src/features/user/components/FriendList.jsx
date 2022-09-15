@@ -1,11 +1,6 @@
 import {
     Avatar,
-    Box,
     HStack,
-    Image,
-    Input,
-    InputGroup,
-    InputLeftElement,
     Text,
     VStack,
 } from '@chakra-ui/react';
@@ -18,7 +13,6 @@ import { useState } from 'react';
 import axiosClient from '../../../api/setupAxios';
 import { handleSignOut } from '../../auth/authSlice';
 import { debounce } from 'lodash';
-import axios from 'axios';
 import moment from 'moment';
 import { useCallback } from 'react';
 import { setCurrentUserTextTo } from '../userSlice';
@@ -149,7 +143,7 @@ const FriendList = () => {
                 console.log(error);
             }
         },
-        [friendList, userId]
+        [friendList, userId, dispatch]
     );
 
     useEffect(() => {
@@ -163,7 +157,7 @@ const FriendList = () => {
         return () => {
             socket.off('receiveFriend')
         }
-    }, [])
+    }, [userId])
 
     const handleChooseUser = (userId, username) => {
         dispatch(setCurrentUserTextTo({textToId: userId, textToUsername: username}))

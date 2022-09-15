@@ -40,18 +40,26 @@ const getFriendList = async (req, res, next) => {
         const userId = req.userId;
         const friendList = await db.Users.findOne({
             where: { userId },
-            attributes: {exclude: ['password']},
-            include: [{ association: 'userFriends', order: ['createAt', 'DESC'] },
-            { association: 'friends', order: ['createAt', 'DESC'] }],
-        })
+            attributes: { exclude: ['password'] },
+            include: [
+                { association: 'userFriends', order: ['createAt', 'DESC'] },
+                { association: 'friends', order: ['createAt', 'DESC'] },
+            ],
+        });
 
         if (!friendList) {
-            return res.json({ login: false, message: 'You must register to use this' })
+            return res.json({
+                login: false,
+                message: 'You must register to use this',
+            });
         }
-        const newFriendList = [...JSON.parse(JSON.stringify(friendList?.friends)), ...JSON.parse(JSON.stringify(friendList?.userFriends))]
-        newFriendList.map(item => {
-            delete item.password
-            return item
+        const newFriendList = [
+            ...JSON.parse(JSON.stringify(friendList?.friends)),
+            ...JSON.parse(JSON.stringify(friendList?.userFriends)),
+        ];
+        newFriendList.map((item) => {
+            delete item.password;
+            return item;
         });
         return res.json(newFriendList);
     } catch (error) {
