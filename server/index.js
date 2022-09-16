@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config()
 
-const routersInit = require('./routers')
+const routersInit = require('./routes')
 const socketInit = require('./socket')
 const app = express();
 
