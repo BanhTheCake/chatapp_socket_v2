@@ -6,7 +6,7 @@ let RedisStore = require('connect-redis')(session);
 require('dotenv').config();
 
 const config = (app) => {
-    const redisClient = new Redis(process.env.REDIS_URL);
+    // const redisClient = new Redis(process.env.REDIS_URL);
     app.use(
         cors({
             origin: process.env.URL_CLIENT,
@@ -18,7 +18,7 @@ const config = (app) => {
     app.set('trust proxy', 1);
     app.use(
         session({
-            store: new RedisStore({ client: redisClient }),
+            // store: new RedisStore({ client: redisClient }),
             secret: 'banhthecake',
             name: 'sid',
             saveUninitialized: false,

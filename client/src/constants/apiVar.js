@@ -1,4 +1,4 @@
-const urlBase = `https://chatappsocketbackend.onrender.com`;
+const urlBase = `http://localhost:3002`;
 
 // Auth
 const apiRefreshToken = `${urlBase}/auth/refreshAccessToken`;
