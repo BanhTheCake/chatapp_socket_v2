@@ -1,6 +1,6 @@
 const db = require('../models');
 const ReconnectingWebSocket  = require('reconnecting-websocket')
-const rws = new ReconnectingWebSocket('ws://my.site.com');
+const rws = new ReconnectingWebSocket('ws://chatapp-socket-v2.vercel.app');
 
 const socketInit = (io) => {
     rws.addEventListener('open', () => {
