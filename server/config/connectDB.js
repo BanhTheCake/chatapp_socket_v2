@@ -1,4 +1,5 @@
 const { Sequelize } = require('sequelize');
+const pg = require('pg')
 require('dotenv').config();
 
 const sequelize = new Sequelize(
@@ -9,6 +10,7 @@ const sequelize = new Sequelize(
         host: 'dpg-cchfmmda4995s2ok8600-a.singapore-postgres.render.com',
         dialect: 'postgres',
         database: 'chat_app_socket',
+        dialectModule: pg,
         dialectOptions: {
             ssl: {
                 require: true,
