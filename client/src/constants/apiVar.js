@@ -1,4 +1,4 @@
-const urlBase = `https://chatapp-socket-v2-backend.vercel.app/`;
+const urlBase = `https://chatapp-socket-v2-backend.vercel.app`;
 
 // Auth
 const apiRefreshToken = `${urlBase}/auth/refreshAccessToken`;
