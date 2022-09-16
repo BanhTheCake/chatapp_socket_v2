@@ -1,7 +1,13 @@
 const db = require('../models');
+const ReconnectingWebSocket  = require('reconnecting-websocket')
+const rws = new ReconnectingWebSocket('ws://my.site.com');
 
 const socketInit = (io) => {
+    rws.addEventListener('open', () => {
+        rws.send('hello!');
+    });
     io.on('connection', (socket) => {
+        console.log('connection');
         try {
             socket.on('connect-room', (data) => {
                 try {     
