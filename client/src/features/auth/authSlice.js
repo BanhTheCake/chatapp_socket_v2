@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { apiLogin, apiLogout, apiRegister } from '../../constants/apiVar';
 import { clearData, setDataUser } from '../user/userSlice';
 
 export const handleLoginUser = createAsyncThunk(
@@ -9,13 +10,10 @@ export const handleLoginUser = createAsyncThunk(
             setTimeout(async () => {
                 try {
                     axios.defaults.withCredentials = true;
-                    const res = await axios.post(
-                        'https://chatappsocketbackend.onrender.com/auth/login',
-                        {
-                            username: data.username,
-                            password: data.password,
-                        }
-                    );
+                    const res = await axios.post(apiLogin, {
+                        username: data.username,
+                        password: data.password,
+                    });
                     if (res.data.err) {
                         reject(rejectWithValue(res.data.message));
                     } else {
@@ -23,7 +21,7 @@ export const handleLoginUser = createAsyncThunk(
                             setDataUser({
                                 username: res.data.user.username,
                                 image: res.data.user.image,
-                                userId: res.data.user.userId
+                                userId: res.data.user.userId,
                             })
                         );
                         localStorage.setItem('token', res.data.token);
@@ -47,13 +45,10 @@ export const handleRegisterUser = createAsyncThunk(
             setTimeout(async () => {
                 try {
                     axios.defaults.withCredentials = true;
-                    const res = await axios.post(
-                        'https://chatappsocketbackend.onrender.com/auth/register',
-                        {
-                            username: data.username,
-                            password: data.password,
-                        }
-                    );
+                    const res = await axios.post(apiRegister, {
+                        username: data.username,
+                        password: data.password,
+                    });
                     if (res.data.err) {
                         reject(rejectWithValue(res.data.message));
                     } else {
@@ -73,10 +68,10 @@ export const handleSignOut = createAsyncThunk(
         return new Promise((resolve, reject) => {
             setTimeout(async () => {
                 try {
-                    axios.defaults.withCredentials = true
-                    await axios.get('https://chatappsocketbackend.onrender.com/auth/logout');
+                    axios.defaults.withCredentials = true;
+                    await axios.get(apiLogout);
                     localStorage.clear();
-                    dispatch(clearData())
+                    dispatch(clearData());
                     resolve();
                 } catch (error) {
                     reject(rejectWithValue(error));

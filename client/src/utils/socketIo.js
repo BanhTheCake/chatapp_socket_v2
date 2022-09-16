@@ -1,6 +1,7 @@
 import { io } from "socket.io-client";
+import { urlBase } from "../constants/apiVar";
 
-const socket = io('https://chatappsocketbackend.onrender.com', {
+const socket = io(urlBase, {
     autoConnect: false,
     withCredentials: true,
 })

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosClient from '../../api/setupAxios';
+import { apiSetImageUser } from '../../constants/apiVar';
 import { setDataAuth } from '../auth/authSlice';
 
 export const setUserImage = createAsyncThunk(
@@ -9,10 +10,7 @@ export const setUserImage = createAsyncThunk(
             setTimeout(async () => {
                 try {
                     console.log(data);
-                    await axiosClient.post(
-                        'https://chatappsocketbackend.onrender.com/setImageUser',
-                        { image: data }
-                    );
+                    await axiosClient.post(apiSetImageUser, { image: data });
                     dispatch(setDataImage(data));
                     dispatch(
                         setDataAuth({ isLogin: true, isFirstLogin: false })

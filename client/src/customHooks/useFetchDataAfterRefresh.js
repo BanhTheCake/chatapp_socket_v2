@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { apiAuthUserReload } from '../constants/apiVar';
 import { setDataAuth } from '../features/auth/authSlice';
 import { setDataUser } from '../features/user/userSlice';
 
@@ -13,9 +14,7 @@ const useFetchDataAfterRefresh = () => {
     useEffect(() => {
         const getData = async () => {
             axios.defaults.withCredentials = true;
-            const res = await axios.get(
-                'https://chatappsocketbackend.onrender.com/auth/authUserReloadPage'
-            );
+            const res = await axios.get(apiAuthUserReload);
             setIsGetData(false);
             if (!res.data?.login) {
                 console.log(res.data);

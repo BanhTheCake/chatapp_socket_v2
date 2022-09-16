@@ -11,7 +11,7 @@ const { Server } = require("socket.io");
 const config = require('./setUpMiddleware');
 const connectDB = require('./config/connectDB');
 
-const io = new Server(server, { cors: { origin: 'https://chatapp-socket-v2.vercel.app', credentials: true } });
+const io = new Server(server, { cors: { origin: process.env.URL_CLIENT, credentials: true } });
 const PORT = process.env.PORT || 3002
 
 // connectDB

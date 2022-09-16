@@ -1,9 +1,4 @@
-import {
-    Avatar,
-    HStack,
-    Text,
-    VStack,
-} from '@chakra-ui/react';
+import { Avatar, HStack, Text, VStack } from '@chakra-ui/react';
 import React, { useMemo } from 'react';
 import UserList from './UserList';
 import SearchBox from './SearchBox';
@@ -18,6 +13,11 @@ import { useCallback } from 'react';
 import { setCurrentUserTextTo } from '../userSlice';
 import socket from '../../../utils/socketIo';
 import { useRef } from 'react';
+import {
+    apiAddFriend,
+    apiGetFriendList,
+    apiSearchFriendList,
+} from '../../../constants/apiVar';
 
 const handleSortByDate = (userList = []) => {
     userList.sort((first, last) => {
@@ -37,7 +37,7 @@ const handleSortByDate = (userList = []) => {
 const FriendList = () => {
     const username = useSelector((state) => state.user.username);
     const image = useSelector((state) => state.user.image);
-    const userId = useSelector((state) => state.user.userId)
+    const userId = useSelector((state) => state.user.userId);
 
     const [userList, setUserList] = useState(null);
     const [isLoadingFriends, setIsLoadingFriends] = useState(false);
@@ -46,7 +46,7 @@ const FriendList = () => {
     const [searchFriends, setSearchFriends] = useState('');
     const [friendList, setFriendList] = useState([]);
 
-    const clearTimeOutFriends = useRef(null)
+    const clearTimeOutFriends = useRef(null);
 
     const dispatch = useDispatch();
 
@@ -54,9 +54,7 @@ const FriendList = () => {
         const getData = async () => {
             try {
                 setIsLoadingFriends(true);
-                const data = await axiosClient.get(
-                    'https://chatappsocketbackend.onrender.com/getFriendList'
-                );
+                const data = await axiosClient.get(apiGetFriendList);
                 if (!data) {
                     dispatch(handleSignOut());
                 }
@@ -86,16 +84,15 @@ const FriendList = () => {
 
     useEffect(() => {
         const getFriends = async () => {
-            setIsLoadingSearch(true)
+            setIsLoadingSearch(true);
             if (clearTimeOutFriends.current) {
-                clearTimeout(clearTimeOutFriends.current)
+                clearTimeout(clearTimeOutFriends.current);
             }
             try {
                 let data;
-                data = await axiosClient.post(
-                    'https://chatappsocketbackend.onrender.com/searchFriendList',
-                    { searchQuery: searchFriends }
-                );
+                data = await axiosClient.post(apiSearchFriendList, {
+                    searchQuery: searchFriends,
+                });
                 if (data) {
                     const friendListExist = userList?.map(
                         (user) => user?.username
@@ -107,9 +104,9 @@ const FriendList = () => {
                         );
                     });
                     clearTimeOutFriends.current = setTimeout(() => {
-                        setIsLoadingSearch(false)
+                        setIsLoadingSearch(false);
                         setFriendList(newData);
-                    }, 300)
+                    }, 300);
                 }
             } catch (error) {
                 console.log(error);
@@ -125,19 +122,26 @@ const FriendList = () => {
             try {
                 console.log(friendId);
                 console.log(username);
-                const data = await axiosClient.post(
-                    'https://chatappsocketbackend.onrender.com/addFriend',
-                    { friendUserId: friendId }
-                );
+                const data = await axiosClient.post(apiAddFriend, {
+                    friendUserId: friendId,
+                });
                 if (data.message === 'successful') {
                     const currentUser = friendList.find(
                         (friend) => friend.userId === friendId
                     );
-                    socket.emit('addFriend', {userId, friend: currentUser.userId})
+                    socket.emit('addFriend', {
+                        userId,
+                        friend: currentUser.userId,
+                    });
                     setUserList((prev) => [currentUser, ...prev]);
-                    dispatch(setCurrentUserTextTo({textToId: friendId, textToUsername: username}))
+                    dispatch(
+                        setCurrentUserTextTo({
+                            textToId: friendId,
+                            textToUsername: username,
+                        })
+                    );
                 }
-                setSearchFriends('')
+                setSearchFriends('');
             } catch (error) {
                 console.log(error);
             }
@@ -146,24 +150,26 @@ const FriendList = () => {
     );
 
     useEffect(() => {
-        socket.on('receiveFriend', data => {
+        socket.on('receiveFriend', (data) => {
             try {
                 console.log('data', data);
                 if (data.friend === userId) {
-                    setUserList(prev => [data.currentUser, ...prev])
+                    setUserList((prev) => [data.currentUser, ...prev]);
                 }
                 return;
             } catch (error) {
                 console.log(error);
             }
-        })
+        });
         return () => {
-            socket.off('receiveFriend')
-        }
-    }, [userId])
+            socket.off('receiveFriend');
+        };
+    }, [userId]);
 
     const handleChooseUser = (userId, username) => {
-        dispatch(setCurrentUserTextTo({textToId: userId, textToUsername: username}))
+        dispatch(
+            setCurrentUserTextTo({ textToId: userId, textToUsername: username })
+        );
     };
 
     return (

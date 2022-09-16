@@ -1,5 +1,6 @@
 import axios from 'axios';
 import queryString from 'query-string';
+import { apiRefreshToken } from '../constants/apiVar';
 
 const axiosClient = axios.create({
     headers: {
@@ -30,15 +31,13 @@ axiosClient.interceptors.response.use(
             err.response?.data?.message === 'jwt expired'
         ) {
             axios.defaults.withCredentials = true;
-            const res = await axios.get(
-                'https://chatappsocketbackend.onrender.com/auth/refreshAccessToken'
-            );
+            const res = await axios.get(apiRefreshToken);
             const token = res.data.token;
 
             if (!token) {
-                return err
-            };
-            
+                return err;
+            }
+
             localStorage.setItem('token', token);
             return axiosClient(err.config);
         }

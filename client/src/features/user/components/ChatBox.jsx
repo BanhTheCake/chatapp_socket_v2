@@ -10,6 +10,10 @@ import { useRef } from 'react';
 import { handleSignOut } from '../../auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import {
+    apiAddNewMessage,
+    apiGetCurrentMessage,
+} from '../../../constants/apiVar';
 
 const ChatBox = () => {
     const [messageList, setMessageList] = useState([]);
@@ -39,7 +43,7 @@ const ChatBox = () => {
                 setIsLoading(true);
                 const data = await axiosClient({
                     method: 'get',
-                    url: 'https://chatappsocketbackend.onrender.com/message/getCurrentMessage',
+                    url: apiGetCurrentMessage,
                     params: {
                         currentUserId: currentUserTextToId,
                     },
@@ -65,12 +69,12 @@ const ChatBox = () => {
                 to: currentUserTextToId,
             });
             socket.on(`receive-message`, (data) => {
-               try {
+                try {
                     console.log(data);
                     setMessageList((prev) => [data, ...prev]);
-               } catch (error) {
+                } catch (error) {
                     console.log(error);
-               }
+                }
             });
         }
         return () => {
@@ -93,7 +97,7 @@ const ChatBox = () => {
             socket.emit('send-message', emitData);
             axiosClient({
                 method: 'post',
-                url: 'https://chatappsocketbackend.onrender.com/message/newMessage',
+                url: apiAddNewMessage,
                 data: {
                     currentUserId: currentUserTextToId,
                     text: input,

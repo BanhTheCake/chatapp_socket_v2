@@ -9,7 +9,7 @@ const config = (app) => {
     const redisClient = new Redis(process.env.REDIS_URL);
     app.use(
         cors({
-            origin: 'https://chatapp-socket-v2.vercel.app',
+            origin: process.env.URL_CLIENT,
             credentials: true,
         })
     );
