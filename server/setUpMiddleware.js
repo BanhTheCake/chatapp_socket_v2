@@ -27,7 +27,7 @@ const config = (app) => {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production' ? 'true' : 'auto',
                 sameSite:
-                    process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+                    process.env.NODE_ENV === 'production' ? 'true' : 'lax',
                 expires: 1000 * 60 * 60 * 24 * 7,
             },
         })
