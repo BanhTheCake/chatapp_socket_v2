@@ -27,5 +27,5 @@ routersInit(app)
 socketInit(io)
 
 server.listen(PORT, () => {
-  console.log('listening on :3002');
+  console.log('listening on: ', PORT);
 });
