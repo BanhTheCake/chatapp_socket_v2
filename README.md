@@ -14,7 +14,3 @@
     - store: redux, redux-thunk
     - other: momentJs, lodash (debounce), axios (api)
     - deploy: vercel.com
-
-### No responsive: (https://chatapp-socket-v2.vercel.app)
-
-    - it exist in 5 minutes <3
